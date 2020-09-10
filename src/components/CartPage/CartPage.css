@@ -7,13 +7,15 @@
 }
 .CartItem-count {
   padding: 5px 10px;
-  border: 1px solid #ccc;
+  border: 1px solid white;
+  background: white;
 }
 .CartItem-addOne,
 .CartItem-removeOne {
   padding: 5px 10px;
-  border: 1px solid #ccc;
-  background: #fff;
+  border: 1px solid #e88073;
+  background: #e88073;
+  color: white;
 }
 .CartItem-addOne {
   border-left: none;
@@ -21,4 +23,3 @@
 .CartItem-removeOne {
   border-right: none;
 }
-

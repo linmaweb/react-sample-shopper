@@ -10,7 +10,7 @@ const Nav = ({ activeTab, onTabChange, items }) => {
   }, 0);
 
   return (
-    <nav className="App-nav">      
+    <nav className="App-nav">
       <ul>
         <li className={`App-nav-item ${activeTab === 0 && 'selected'}`}>
           <a onClick={() => onTabChange(0)}>Items</a>

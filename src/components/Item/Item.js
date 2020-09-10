@@ -1,11 +1,13 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import './Item.css';
+import React from "react";
+import PropTypes from "prop-types";
+import "./Item.css";
 
 const Item = ({ item, children }) => (
   <div className="Item">
     <div className="Item-left">
-      <div className="Item-image" />
+      <div className="Item-image">
+        <img src={item.image} />
+      </div>
       <div className="Item-title">{item.name}</div>
       <div className="Item-description">{item.description}</div>
     </div>
@@ -15,10 +17,10 @@ const Item = ({ item, children }) => (
     </div>
   </div>
 );
+
 Item.propTypes = {
   item: PropTypes.object.isRequired,
-  children: PropTypes.node
+  children: PropTypes.node,
 };
 
 export default Item;
-
