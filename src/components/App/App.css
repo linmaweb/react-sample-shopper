@@ -26,11 +26,12 @@
 .App-nav-item a {
   cursor: pointer;
   color: #e88073;
+  text-decoration: none;
 }
 .App-nav-item a:hover {
   color: #999;
 }
-.App-nav-item.selected {
+.App-nav-item .selected {
   border-bottom-color: #e88073;
 }
 .App-nav-cart-summary {

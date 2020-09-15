@@ -1,4 +1,5 @@
 import React from "react";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Nav from "../Nav/Nav";
 import ItemPage from "../ItemPage/ItemPage";
 import CartPage from "../CartPage/CartPage";
@@ -7,14 +8,7 @@ import "./App.css";
 
 class App extends React.Component {
   state = {
-    activeTab: 0,
     cart: [],
-  };
-
-  handleTabChange = (index) => {
-    this.setState({
-      activeTab: index,
-    });
   };
 
   handleAddToCart = (item) => {
@@ -33,16 +27,6 @@ class App extends React.Component {
     });
   };
 
-  renderContent() {
-    switch (this.state.activeTab) {
-      default:
-      case 0:
-        return <ItemPage items={items} onAddToCart={this.handleAddToCart} />;
-      case 1:
-        return this.renderCart();
-    }
-  }
-
   computeCartItems() {
     const itemCounts = this.state.cart.reduce((itemCounts, itemId) => {
       itemCounts[itemId] = itemCounts[itemId] || 0;
@@ -59,26 +43,26 @@ class App extends React.Component {
     });
   }
 
-  renderCart() {
-    return (
-      <CartPage
-        items={this.computeCartItems()}
-        onAddOne={this.handleAddToCart}
-        onRemoveOne={this.handleRemoveOne}
-      />
-    );
-  }
-
   render() {
-    let { activeTab } = this.state;
     return (
       <div className="App">
-        <Nav
-          activeTab={activeTab}
-          onTabChange={this.handleTabChange}
-          items={this.computeCartItems()}
-        />
-        <main className="App-content">{this.renderContent()}</main>
+        <Router>
+          <div>
+            <Nav items={this.computeCartItems()} />
+            <Switch>
+              <Route exact path="/">
+                <ItemPage items={items} onAddToCart={this.handleAddToCart} />
+              </Route>
+              <Route path="/cart">
+                <CartPage
+                  items={this.computeCartItems()}
+                  onAddOne={this.handleAddToCart}
+                  onRemoveOne={this.handleRemoveOne}
+                />
+              </Route>
+            </Switch>
+          </div>
+        </Router>
       </div>
     );
   }
