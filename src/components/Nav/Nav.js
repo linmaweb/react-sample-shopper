@@ -1,6 +1,5 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-import PropTypes from "prop-types";
 
 const Nav = ({ items }) => {
   const itemCount = items.reduce((sum, item) => {
@@ -46,9 +45,6 @@ const Nav = ({ items }) => {
       </div>
     </nav>
   );
-};
-Nav.propTypes = {
-  items: PropTypes.array.isRequired,
 };
 
 export default Nav;

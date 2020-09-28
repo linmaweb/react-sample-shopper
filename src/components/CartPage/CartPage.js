@@ -1,5 +1,4 @@
 import React from "react";
-import PropTypes from "prop-types";
 import Item from "../Item/Item";
 import "./CartPage.css";
 
@@ -29,12 +28,6 @@ const CartPage = ({ items, onAddOne, onRemoveOne }) => {
       ))}
     </ul>
   );
-};
-
-CartPage.propTypes = {
-  items: PropTypes.array.isRequired,
-  onAddOne: PropTypes.func.isRequired,
-  onRemoveOne: PropTypes.func.isRequired,
 };
 
 export default CartPage;

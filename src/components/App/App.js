@@ -1,34 +1,26 @@
-import React from "react";
+import React, { useState } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Nav from "../Nav/Nav";
+import Title from "../Title/Title";
 import ItemPage from "../ItemPage/ItemPage";
 import CartPage from "../CartPage/CartPage";
 import { items } from "../../config";
 import "./App.css";
 
-class App extends React.Component {
-  state = {
-    cart: [],
+const App = () => {
+  const [cart, setCart] = useState([]);
+
+  const handleAddToCart = (item) => {
+    setCart([...cart, item.id]);
   };
 
-  handleAddToCart = (item) => {
-    this.setState({
-      cart: [...this.state.cart, item.id],
-    });
+  const handleRemoveOne = (item) => {
+    let index = cart.indexOf(item.id);
+    setCart([...cart.slice(0, index), ...cart.slice(index + 1)]);
   };
 
-  handleRemoveOne = (item) => {
-    let index = this.state.cart.indexOf(item.id);
-    this.setState({
-      cart: [
-        ...this.state.cart.slice(0, index),
-        ...this.state.cart.slice(index + 1),
-      ],
-    });
-  };
-
-  computeCartItems() {
-    const itemCounts = this.state.cart.reduce((itemCounts, itemId) => {
+  const computeCartItems = () => {
+    const itemCounts = cart.reduce((itemCounts, itemId) => {
       itemCounts[itemId] = itemCounts[itemId] || 0;
       itemCounts[itemId]++;
       return itemCounts;
@@ -41,31 +33,32 @@ class App extends React.Component {
         count: itemCounts[itemId],
       };
     });
-  }
+  };
 
-  render() {
-    return (
+  return (
+    <>
+      <Title type="Shopper" />
       <div className="App">
         <Router>
           <div>
-            <Nav items={this.computeCartItems()} />
+            <Nav items={computeCartItems()} />
             <Switch>
               <Route exact path="/">
-                <ItemPage items={items} onAddToCart={this.handleAddToCart} />
+                <ItemPage items={items} onAddToCart={handleAddToCart} />
               </Route>
               <Route path="/cart">
                 <CartPage
-                  items={this.computeCartItems()}
-                  onAddOne={this.handleAddToCart}
-                  onRemoveOne={this.handleRemoveOne}
+                  items={computeCartItems()}
+                  onAddOne={handleAddToCart}
+                  onRemoveOne={handleRemoveOne}
                 />
               </Route>
             </Switch>
           </div>
         </Router>
       </div>
-    );
-  }
-}
+    </>
+  );
+};
 
 export default App;

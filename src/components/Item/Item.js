@@ -1,12 +1,11 @@
 import React from "react";
-import PropTypes from "prop-types";
 import "./Item.css";
 
 const Item = ({ item, children }) => (
   <div className="Item">
     <div className="Item-left">
       <div className="Item-image">
-        <img src={item.image} />
+        <img src={item.image} alt={item.name} />
       </div>
       <div className="Item-title">{item.name}</div>
       <div className="Item-description">{item.description}</div>
@@ -17,10 +16,5 @@ const Item = ({ item, children }) => (
     </div>
   </div>
 );
-
-Item.propTypes = {
-  item: PropTypes.object.isRequired,
-  children: PropTypes.node,
-};
 
 export default Item;

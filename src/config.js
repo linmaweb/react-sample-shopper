@@ -1,4 +1,4 @@
-let items = [
+const items = [
   {
     id: 0,
     name: "Lorem ipsum dolor sit amet",
